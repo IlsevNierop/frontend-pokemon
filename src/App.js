@@ -38,18 +38,21 @@ function App() {
 
     return (
         <>
-            <button
+            <h1>pokemon</h1>
+            <div className="buttons">
+            <button className="button"
                 disabled={pokemonsData.previous === null}
                 type="button"
                 onClick={ () => setLink(pokemonsData.previous)}>
                 Vorige
             </button>
-            <button
+            <button className="button"
                 disabled={pokemonsData.next === null}
                 type="button"
                 onClick={ () => setLink(pokemonsData.next)}>
                 Volgende
             </button>
+            </div>
             <div className="message">
                 {error && <p>Er gaat iets mis met het ophalen van de data</p>}
                 {loading && <p>Loading...</p>}

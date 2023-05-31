@@ -31,27 +31,34 @@ function PokemonTile({name, url}) {
     }, [])
 
 
-
     const {weight, moves, abilities, sprites} = singlePokemonData;
 
     return (
         <>
+            <div className="message">
+                {error && <p>Er gaat iets mis met het ophalen van de data</p>}
+                {loading && <p>Loading...</p>}
+            </div>
             {Object.keys(singlePokemonData).length > 0 &&
 
                 <article className="tile-pokemon">
                     <h2 className="pokemon-name">{name}</h2>
                     <img src={sprites.front_default} alt={`Image of ${name}`}/>
-                    <h3>Weight: {weight}</h3>
-                    <h3>Moves: {moves.length}</h3>
-                    <h3>Abilities: </h3>
-                    {abilities.map((ability) => {
-                        return (<li key={`${ability.ability.name}-${ability.slot}`}>{ability.ability.name}</li>)
-                    })}
+                    <p><strong>Weight: </strong> {weight}</p>
+                    <p><strong>Moves: </strong> {moves.length}</p>
+
+                    <p><strong>Abilities: </strong></p>
+                    {
+                        abilities.map((ability) => {
+                            return (<li key={`${ability.ability.name}-${ability.slot}`}>{ability.ability.name}</li>)
+                        })
+                    }
                 </article>
 
             }
         </>
-    );
+    )
+        ;
 }
 
 export default PokemonTile;
