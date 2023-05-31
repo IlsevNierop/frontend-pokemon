@@ -1,0 +1,32 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    /*border: 1px solid indianred;*/
+}
+
+body {
+    font-family: 'Roboto', Arial, sans-serif;
+    /*text-align: center;*/
+    font-weight: normal;
+    color: var(--standard-text-black);
+    min-height: 100vh;
+}
+
+.pokemon-overview{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+article {
+    border: 1px solid darkgrey;
+    padding: 5px;
+    margin: 20px;
+    width: 200px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+}

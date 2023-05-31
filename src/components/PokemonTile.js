@@ -6,6 +6,7 @@ function PokemonTile({name, url}) {
     const [error, toggleError] = useState(false);
     const [loading, toggleLoading] = useState(false);
 
+
     // console.log(name)
     // console.log(url)
 
@@ -17,7 +18,7 @@ function PokemonTile({name, url}) {
                 if (response.data) {
                     toggleError(false);
                 }
-                console.log(response.data);
+                // console.log(response.data);
                 setSinglePokemonData(response.data)
             } catch (e) {
                 console.log(e);
@@ -29,10 +30,9 @@ function PokemonTile({name, url}) {
         void fetchDataSinglePokemon();
     }, [])
 
-    console.log(singlePokemonData.abilities);
 
 
-
+    const {weight, moves, abilities, sprites} = singlePokemonData;
 
     return (
         <>
@@ -40,12 +40,12 @@ function PokemonTile({name, url}) {
 
                 <article className="tile-pokemon">
                     <h2 className="pokemon-name">{name}</h2>
-                    <img src={singlePokemonData.sprites.front_default} alt="test"/>
-                    <p>Weight: {singlePokemonData.weight}</p>
-                    <p>Moves: {singlePokemonData.moves.length}</p>
-                    <p>Abilities: </p>
-                    {singlePokemonData.abilities.map((ability) => {
-                        return (<p>{ability.ability.name}</p>)
+                    <img src={sprites.front_default} alt={`Image of ${name}`}/>
+                    <h3>Weight: {weight}</h3>
+                    <h3>Moves: {moves.length}</h3>
+                    <h3>Abilities: </h3>
+                    {abilities.map((ability) => {
+                        return (<li key={`${ability.ability.name}-${ability.slot}`}>{ability.ability.name}</li>)
                     })}
                 </article>
 
