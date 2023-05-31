@@ -8,14 +8,14 @@ function App() {
     const [error, toggleError] = useState(false);
     const [loading, toggleLoading] = useState(false);
     const [pokemonsData, setPokemonsData] = useState([]);
-    const [link, setLink] = useState("https://pokeapi.co/api/v2/pokemon?offset=0&limit=20");
+    const [endpoint, setEndpoint] = useState("https://pokeapi.co/api/v2/pokemon?offset=0&limit=20");
 
 
     useEffect(() => {
         async function fetchDataAllPokemons() {
             toggleLoading(true);
             try {
-                const response = await axios.get(`${link}`);
+                const response = await axios.get(`${endpoint}`);
                 if (response.data) {
                     toggleError(false);
                 }
@@ -30,44 +30,41 @@ function App() {
         void fetchDataAllPokemons();
 
 
-    }, [link])
+    }, [endpoint])
 
     const {results} = pokemonsData;
-
 
 
     return (
         <>
             <h1>pokemon</h1>
             <div className="buttons">
-            <button className="button"
-                disabled={pokemonsData.previous === null}
-                type="button"
-                onClick={ () => setLink(pokemonsData.previous)}>
-                Vorige
-            </button>
-            <button className="button"
-                disabled={pokemonsData.next === null}
-                type="button"
-                onClick={ () => setLink(pokemonsData.next)}>
-                Volgende
-            </button>
+                <button className="button"
+                        disabled={pokemonsData.previous === null}
+                        type="button"
+                        onClick={() => setEndpoint(pokemonsData.previous)}>
+                    Vorige
+                </button>
+                <button className="button"
+                        disabled={pokemonsData.next === null}
+                        type="button"
+                        onClick={() => setEndpoint(pokemonsData.next)}>
+                    Volgende
+                </button>
             </div>
             <div className="message">
                 {error && <p>Er gaat iets mis met het ophalen van de data</p>}
                 {loading && <p>Loading...</p>}
             </div>
             <div className="pokemon-overview">
-            {results && results.map((pokemon) => {
-                return(
-                    <PokemonTile name={pokemon.name} url={pokemon.url} key={pokemon.name}></PokemonTile>
-                )
+                {results && results.map((pokemon) => {
+                    return (
+                        <PokemonTile name={pokemon.name} endpoint={pokemon.url} key={pokemon.name}></PokemonTile>
+                    )
 
-            })
-            }
+                })
+                }
             </div>
-
-
 
 
         </>

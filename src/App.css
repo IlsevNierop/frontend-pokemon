@@ -6,6 +6,9 @@
     /*border: 1px solid indianred;*/
 }
 
+.message {
+    color: darkred;
+}
 
 body {
     display: flex;

@@ -1,20 +1,20 @@
 import React, {useEffect, useState} from 'react';
 import axios from "axios";
 
-function PokemonTile({name, url}) {
+function PokemonTile({name, endpoint}) {
     const [singlePokemonData, setSinglePokemonData] = useState({});
     const [error, toggleError] = useState(false);
     const [loading, toggleLoading] = useState(false);
 
 
     // console.log(name)
-    // console.log(url)
+    console.log(endpoint)
 
     useEffect(() => {
         async function fetchDataSinglePokemon() {
             toggleLoading(true);
             try {
-                const response = await axios.get(`${url}`);
+                const response = await axios.get(`${endpoint}`);
                 if (response.data) {
                     toggleError(false);
                 }
