@@ -14,7 +14,7 @@ function PokemonTile({name, endpoint}) {
         async function fetchDataSinglePokemon() {
             toggleLoading(true);
             try {
-                const response = await axios.get(`${endpoint}`);
+                const response = await axios.get(endpoint);
                 if (response.data) {
                     toggleError(false);
                 }

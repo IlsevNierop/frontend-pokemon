@@ -7,7 +7,7 @@ function App() {
 
     const [error, toggleError] = useState(false);
     const [loading, toggleLoading] = useState(false);
-    const [pokemonsData, setPokemonsData] = useState([]);
+    const [pokemonsData, setPokemonsData] = useState({});
     const [endpoint, setEndpoint] = useState("https://pokeapi.co/api/v2/pokemon?offset=0&limit=20");
 
 
@@ -15,7 +15,7 @@ function App() {
         async function fetchDataAllPokemons() {
             toggleLoading(true);
             try {
-                const response = await axios.get(`${endpoint}`);
+                const response = await axios.get(endpoint);
                 if (response.data) {
                     toggleError(false);
                 }
@@ -32,7 +32,6 @@ function App() {
 
     }, [endpoint])
 
-    const {results} = pokemonsData;
 
 
     return (
@@ -57,7 +56,7 @@ function App() {
                 {loading && <p>Loading...</p>}
             </div>
             <div className="pokemon-overview">
-                {results && results.map((pokemon) => {
+                {pokemonsData.results && pokemonsData.results.map((pokemon) => {
                     return (
                         <PokemonTile name={pokemon.name} endpoint={pokemon.url} key={pokemon.name}></PokemonTile>
                     )
